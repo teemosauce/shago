@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两栏布局</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* 清除浮动 解决浮动元素导致的父元素高度坍塌问题 */
+        .clearfix::after {
+            clear: both;
+            display: block;
+            content: "";
+        }
+
+        .container {
+            border: 1px solid lightgreen;
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .pull-left {
+            float: left;
+        }
+
+        .left {
+            background-color: lightgray;
+            height: 200px;
+            width: 200px;
+        }
+
+        .margin-l-220 {
+            margin-left: 220px;
+        }
+
+        .main {
+            background-color: lightpink;
+            height: 200px;
+            overflow: auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .flex-main {
+            flex: 1;
+        }
+
+        .margin-l-20 {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">(第一种)利用浮动进行两栏布局</h1>
+    <div class="container clearfix">
+        <div class="left pull-left">
+            <div class="title">left 区域</div>
+            左区域宽度固定(200px) 并且靠左边浮动(float:left)
+        </div>
+        <div class="main margin-l-220">
+            <div class="title">main 区域</div>
+            主区域设置左边margin为浮动元素的宽度(200px)+主区域离浮动元素的距离(20px)
+            <div>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="title">(第二种)利用Flex进行两栏布局</h1>
+    <div class="container flex-container">
+        <div class="left flex-left">
+            <div class="title">left 区域</div>
+            左区域宽度固定(200px)
+        </div>
+        <div class="main flex-main margin-l-20">
+            <div class="title">main 区域</div>
+            主区域设置flex为1 即占满剩余位置的全部区域，并设置margin-left=20px
+            <div>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

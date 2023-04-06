@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏布局</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .clearfix::after {
+            clear: both;
+            display: block;
+            content: '';
+        }
+
+
+        .title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .container {
+            /* display: flow-root; */
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid lawngreen;
+            height: 200px;
+        }
+
+        .left {
+            background-color: lightcyan;
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+        }
+
+        .right {
+            background-color: lightcyan;
+            width: 200px;
+            height: 200px;
+            overflow: auto;
+        }
+
+        .pull-left {
+            float: left;
+        }
+
+        .pull-right {
+            float: right;
+        }
+
+        .margin-lr-220 {
+            margin: 0 220px;
+        }
+
+        .margin-lr-20 {
+            margin: 0 20px;
+        }
+
+        .middle {
+            background-color: lightcoral;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-middle {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">(第一种)利用浮动进行三栏布局</h1>
+    <div class="container clearfix">
+        <div class="left pull-left">
+            <div class="title">left 区域</div>
+            左区域宽度固定(200px) 并且靠左边浮动(float:left)
+        </div>
+        <div class="right pull-right">
+            <div class="title">right 区域</div>
+            右区域宽度固定(200px) 并且靠右边浮动(float:right)
+        </div>
+        <div class="middle margin-lr-220">
+            <div class="title">main 区域</div>
+            主区域设置左右边margin为浮动元素的宽度(200px)+主区域离浮动元素的距离(20px)
+            <div>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="title">(第一种)利用Flex进行三栏布局</h1>
+    <div class="container flex-container">
+        <div class="left">
+            <div class="title">left 区域</div>
+            左区域宽度固定(200px)
+        </div>
+        <div class="middle flex-middle margin-lr-20">
+            <div class="title">main 区域</div>
+            主区域设置flex为1 即占满剩余位置的全部区域，并设置左右margin=20px
+            <div>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+                故意溢出内容<br>
+            </div>
+        </div>
+        <div class="right">
+            <div class="title">right 区域</div>
+            右区域宽度固定(200px)
+        </div>
+    </div>
+
+</body>
+
+</html>
