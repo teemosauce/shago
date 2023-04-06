@@ -37,17 +37,18 @@ function flatten2(arr) {
 
 function main() {
     let arr = [1, 2, [3], [4, 5], [[6, 7], [8], [[9], 10, 11]], [[[[[[[[[[[[12]], [13]]]]]], [14]]]], [15]]]]
-    console.log('源数组', arr)
+    console.log('源数组')
+    console.table(arr)
 
-    console.time('递归用时')
+    console.time('递归扁平化数组用时')
     let newArr = flatten(arr)
-    console.log('扁平化后的数组(递归法)', newArr)
-    console.timeEnd('递归用时')
+    console.table(newArr)
+    console.timeEnd('递归扁平化数组用时')
 
-    console.time('循环用时')
-    let newArr2 = flatten(arr)
-    console.log('扁平化后的数组（循环法）', newArr2)
-    console.timeEnd('循环用时')
+    console.time('循环扁平化数组用时')
+    let newArr2 = flatten2(arr)
+    console.table(newArr2)
+    console.timeEnd('循环扁平化数组用时')
 }
 
 
