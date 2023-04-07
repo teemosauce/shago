@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>垂直居中</title>
+    <style>
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid lightsalmon;
+            height: 200px;
+            position: relative;
+        }
+
+        /* 可用绝对定位也可用相对定位 */
+        .vertical-align-left {
+            background-color: aquamarine;
+            display: inline-block;
+            position: relative;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        /* 只能用绝对定位 */
+        .vertical-align-right {
+            background-color: rgb(255, 191, 127);
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+    </style>
+
+    <style>
+        .flex-container {
+            display: flex;
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid lightsalmon;
+            height: 200px;
+            align-items: center;
+            position: relative;
+        }
+
+        .flex-vertical-algin-left {
+            background-color: aquamarine;
+            position: relative;
+            left: 10px;
+        }
+
+        .flex-vertical-algin-right {
+            background-color: rgb(255, 191, 127);
+            position: absolute;
+            right:10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">使用绝对定位或相对定位垂直居中</h1>
+    <div class="container">
+        <div class="vertical-align-left">
+            <div>未知高度垂直靠左居中</div>
+            <div>哈哈</div>
+        </div>
+
+        <div class="vertical-align-right">
+            <div>未知高度垂直靠右居中</div>
+            <div>哈哈</div>
+        </div>
+    </div>
+
+    <h1 class="title">使用Flex布局垂直居中</h1>
+    <div class="flex-container">
+        <div class="flex-vertical-algin-left">
+            <div>未知高度垂直靠左居中</div>
+            <div>哈哈</div>
+        </div>
+        <div class="flex-vertical-algin-right">
+            <div>未知高度垂直靠右居中</div>
+            <div>哈哈</div>
+        </div>
+    </div>
+</body>
+
+</html>
