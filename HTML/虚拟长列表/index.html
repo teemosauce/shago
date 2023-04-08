@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟长列表</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list {
+            width: 320px;
+            border: 1px solid red;
+            height: 480px;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            height: 60px;
+            background-color: aqua;
+            text-align: center;
+            border: 1px solid #fff;
+            line-height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div>
+            <h1 class="title text-center">普通长列表</h1>
+            <div class="list" id="list1">
+            </div>
+        </div>
+
+        <div>
+            <h1 class="title text-center">虚拟长列表</h1>
+            <div class="list" id="list2">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        // 公共方法
+        // 节流函数
+        function throttle(fn, delay) {
+            let task = null
+            return function () {
+                let args = [...arguments]
+                if (!task) {
+                    task = setTimeout(() => {
+                        fn.apply(this, args)
+                        task = null
+                    }, delay)
+                }
+            }
+        }
+
+        // 模拟一次返回十条数据
+        function getData(nextId) {
+            return new Promise((resolve) => {
+                let t = setTimeout(() => {
+                    let arr = []
+                    for (let i = 1; i <= 10; i++) {
+                        arr.push({
+                            id: i + nextId
+                        })
+                    }
+
+                    resolve(arr)
+                    clearTimeout(t)
+                    t = null
+                }, Math.random() * 1000)
+            })
+        }
+    </script>
+
+
+
+    <script>
+        // 普通长列表滚动加载
+        let lastID = 0
+
+        let listDiv = document.querySelector('#list1');
+        function render(items) {
+            let fragment = document.createDocumentFragment();
+            items.forEach(item => {
+                let listItem = document.createElement('div')
+                listItem.innerText = item.id
+                listItem.classList.add('list-item')
+                fragment.append(listItem)
+            })
+            listDiv.append(fragment)
+        }
+
+        
+        function nextPage() {
+            getData(lastID).then((data) => {
+                render(data)
+                lastID = data[data.length - 1].id
+            })
+        }
+
+        let ITEM_HEIGHT = 60 // 单个项的高度
+        let VIEW_HEIGHT = 480 // 可视化区域的高度
+        let throttleScroll = throttle(function (event) {
+            let totalHeight = ITEM_HEIGHT * listDiv.childElementCount  // 列表总高度
+            let scrollTop = event.target.scrollTop
+            if (scrollTop >= totalHeight - VIEW_HEIGHT) {
+                nextPage()
+            }
+        }, 60)
+        listDiv.addEventListener('scroll', throttleScroll)
+
+        nextPage()
+
+    </script>
+
+
+    <script>
+        // 虚拟长列表滚动加载
+        // 原理 列表定宽 实时的根据计算 添加和移除元素
+
+    </script>
+</body>
+
+</html>
