@@ -12,8 +12,10 @@
 - 当前状态：在职
 - 期望职位：Web高级前端工程师、全栈工程师
 - 期望薪资：面议
-- 联系电话：13718716860
-- 个人邮箱：larry1314mvp@foxmail.com
+- 期望城市：北京
+- 手机：13718716860
+- Email：larry1314mvp@foxmail.com
+- Github: [https://github.com/teemosauce/]
 
 
 
