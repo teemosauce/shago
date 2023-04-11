@@ -32,6 +32,14 @@ function flatten2(arr) {
     return newArr
 }
 
+/**
+ * 利用数组的toString方法
+ * @param {Array} arr 多维数据
+ * @returns 
+ */
+function flatten3(arr) {
+    return arr.toString().split(',').map(item => parseInt(item))
+}
 
 
 
@@ -49,6 +57,12 @@ function main() {
     let newArr2 = flatten2(arr)
     console.table(newArr2)
     console.timeEnd('循环扁平化数组用时')
+
+
+    console.time('利用toString扁平化数组用时')
+    let newArr3 = flatten3(arr)
+    console.table(newArr3)
+    console.timeEnd('利用toString扁平化数组用时')
 }
 
 
