@@ -102,4 +102,11 @@ function main() {
     })
 }
 
-main()
+// main()
+let a = new Array(3).fill(0)
+
+a = a.map(function(item){
+    console.log(item)
+    return item+2
+})
+console.log(a)

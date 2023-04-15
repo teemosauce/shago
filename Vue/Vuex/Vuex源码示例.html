@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex源码示例</title>
+    <script src="../libs/vue.js"></script>
+    <script src="../libs/vuex.js"></script>
+
+    <style>
+        .render-button {
+            background-color: aquamarine;
+            margin-top: 50px;
+        }
+
+        .template-button {
+            background-color: blueviolet;
+            margin-top: 50px;
+        }
+
+        button {
+            margin-left: 50px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+
+        .green {
+            background-color: green;
+        }
+
+        .right {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 50px;
+            background-color: aquamarine;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+
+<script>
+
+    let components = {
+        Readme: {
+            template: '<div>局部组件</div>'
+        },
+        // RenderButton: {
+        //     template: '<div>局部按钮</div>'
+        // }
+    }
+
+    let store = new Vuex.Store({
+        state: {
+            count: 0
+        },
+        getters: {
+            count(state) {
+                console.log('state', state)
+                return state.count
+            }
+        },
+        mutations: {
+            INCREMENT(state) {
+                state.count = state.count + 1
+            }
+        },
+        actions: {
+            increment() {
+                this.commit('INCREMENT')
+            }
+        },
+        modules: {
+            app: {
+                namespaced: true,
+                state: {
+                    title: '默认标题'
+                },
+                mutations: {
+                    CHANGE_TITLE(state, title) {
+                        state.title = title
+                    }
+                },
+                actions: {
+                    increment({ commit }, title) {
+                        commit('CHANGE_TITLE', title)
+                    }
+                },
+            }
+        }
+    });
+
+    // render函数组件示例
+    Vue.component('RenderButton', {
+        props: {
+            title: String
+        },
+        computed: {
+            ...Vuex.mapGetters(['count'])
+        },
+        render(h) {
+            console.log("Render RenderButton start.")
+            let button = h('button', {
+                on: {
+                    click: () => {
+                        this.say()
+                    }
+                },
+                class: 'button'
+            }, this.title)
+
+            let vnode = h('div', {
+                class: 'render-button'
+            }, ['当前值：' + this.count, button])
+            console.log("Render RenderButton end.", vnode)
+            return vnode
+        },
+        methods: {
+            say() {
+                console.log(this.$store.state)
+                // console.log(this.count)
+                this.$store.dispatch('increment')
+            }
+        },
+
+    })
+
+
+    // 自定义指令
+    Vue.directive('d', (el, _a, vnode) => {
+        if (_a.value % 2 == 0) {
+            el.classList.remove('green')
+            el.classList.add('red')
+        } else {
+            el.classList.remove('red')
+            el.classList.add('green')
+        }
+
+        let child = document.querySelector('div.right')
+        if (!child) {
+            child = document.createElement('div');
+            child.classList = ['right']
+            document.body.append(child)
+            child.addEventListener('click', (e) => {
+                console.log(e.target.innerText)
+            })
+        }
+        child.innerText = _a.value
+    })
+
+    let getters = Vuex.mapGetters(['count'])
+
+    // 模板组件示例
+    Vue.component('TemplateButton', {
+        props: {
+            title: String
+        },
+        computed: {
+            ...getters
+        },
+        components: {
+            ...components
+        },
+        methods: {
+            say() {
+                console.log(this.$store.state)
+                this.$store.dispatch('increment')
+            }
+        },
+        template: '<div v-d="count" class="template-button">当前值：{{count}}<button @click="say">{{title}}</button> <div><readme></readme></div></div>'
+    })
+
+
+    debugger
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                title: '你好'
+            }
+        },
+        store,
+        computed: {
+            ...getters
+        },
+        components: {
+            ...components
+        },
+        render(h) {
+            // debugger
+            console.log("Render app start.")
+            let button1 = h('render-button', {
+                props: {
+                    title: 'RenderButton'
+                }
+            })
+
+            let button2 = h('template-button', {
+                props: {
+                    title: 'TemplateButton'
+                },
+            })
+            let vnode = h('div', [h('div', this.count), button1, button2, h('readme')])
+
+            console.log("Render app end.", vnode)
+            return vnode
+        }
+    })
+
+</script>
+
+</html>

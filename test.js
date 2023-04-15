@@ -1,27 +1,18 @@
 let obj = {
-    id: 1
-}
-
-Object.defineProperty(obj, 'name', {
-    configurable: false,
-    enumerable: false, // 遍历时是否可枚举
-    _v: undefined,
-    get() {
-        return this._v
+    name: '小萝卜',
+    info: {
+        sex: '男',
+        age: 18
     },
-    set(v) {
-        this._v = v
-    }
-})
-
-console.log(obj.hasOwnProperty('name'))
-
-console.log('name' in obj)
-
-console.log(Object.keys(obj))
-
-
-for(var key in obj) {
-    console.log(key)
+    tel: 13718716860
 }
 
+
+let { name, info, ...other} = obj;
+console.log(name)
+
+info.age = 1000
+console.log(info)
+other.tel = 110
+console.log(other)
+console.log(obj)
