@@ -57,11 +57,20 @@
 
     let components = {
         Readme: {
-            template: '<div>局部组件</div>'
+            template: '<div>Readme</div>'
         },
         // RenderButton: {
         //     template: '<div>局部按钮</div>'
         // }
+        Setup: {
+            setup() {
+                console.log("setup")
+                return function (h) {
+                    console.log(111)
+                    return h('div', 'Setup')
+                }
+            },
+        }
     }
 
     let store = new Vuex.Store({
@@ -185,7 +194,7 @@
     })
 
 
-    debugger
+    // debugger
     let app = new Vue({
         el: '#app',
         data() {
@@ -200,7 +209,36 @@
         components: {
             ...components
         },
+        setup(props, context) {
+            console.log(props, context)
+            let a = Vue.ref(1);
+            setTimeout(() => {
+                a.value = 10
+            }, 5000)
+
+            Vue.watch(a, (a, b) => {
+                console.log(a, b)
+            })
+            Vue.onMounted(() => {
+                console.log(1111)
+            })
+
+            function say() {
+                console.log(a.value)
+            }
+
+            return function (h) {
+                return h('div', {
+                    on: {
+                        click() {
+                            say()
+                        }
+                    }
+                }, 'Setup' + a.value)
+            }
+        },
         render(h) {
+
             // debugger
             console.log("Render app start.")
             let button1 = h('render-button', {
@@ -214,12 +252,14 @@
                     title: 'TemplateButton'
                 },
             })
-            let vnode = h('div', [h('div', this.count), button1, button2, h('readme')])
+            let vnode = h('div', [h('div', this.count), button1, button2, h('readme')], h('setup'))
 
             console.log("Render app end.", vnode)
             return vnode
         }
     })
+
+    console.log(app)
 
 </script>
 

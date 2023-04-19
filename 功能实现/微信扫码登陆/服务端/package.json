@@ -1,0 +1,21 @@
+{
+  "name": "qr-login",
+  "version": "1.0.0",
+  "description": "服务端登录实现",
+  "main": "index.js",
+  "dependencies": {
+    "koa": "^2.14.2",
+    "koa-router": "^12.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "serve": "node ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "qrcode",
+    "login"
+  ],
+  "author": "lyp",
+  "license": "MIT"
+}

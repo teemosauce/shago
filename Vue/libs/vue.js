@@ -4672,7 +4672,6 @@
   var uid = 0;
   function initMixin$1(Vue) {
       Vue.prototype._init = function (options) {
-          console.log('uid=', uid);
           var vm = this;
           // a uid
           vm._uid = uid++;

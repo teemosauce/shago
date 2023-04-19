@@ -1,18 +1,5 @@
-let obj = {
-    name: '小萝卜',
-    info: {
-        sex: '男',
-        age: 18
-    },
-    tel: 13718716860
-}
+let map = new WeakMap()
+let a = { a: 1 }
+map.set("avss", 1)
 
-
-let { name, info, ...other} = obj;
-console.log(name)
-
-info.age = 1000
-console.log(info)
-other.tel = 110
-console.log(other)
-console.log(obj)
+console.log(map.get("avss"))
