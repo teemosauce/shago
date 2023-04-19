@@ -14,33 +14,36 @@ let obj = reactive(o)
 // obj.c.a 获取c和a都有反应
 
 effect(function render1() {
-    obj.a
-    // effect(()=> {
-    //     console.log(obj.c.a)
-    // })
+    // console.log(`我是${JSON.stringify(obj.d)}`)
+    console.log(`我是${obj.kk}`)
 })
 
-effect(function render4() {
-    obj.a
-    // effect(()=> {
-    //     console.log(obj.c.a)
-    // })
-})
+obj.kk = 10
+obj.kk = 1100
+
+// obj.kkk = "1200"
+
+// effect(function render4() {
+//     obj.a
+//     // effect(()=> {
+//     //     console.log(obj.c.a)
+//     // })
+// })
 
 
-effect(function render3() {
-    obj.c.a
-    // effect(()=> {
-    //     console.log(obj.c.a)
-    // })
-})
+// effect(function render3() {
+//     obj.c.a
+//     // effect(()=> {
+//     //     console.log(obj.c.a)
+//     // })
+// })
 
-effect(function render2() {
-    obj.b
-    // effect(()=> {
-    //     console.log(obj.c.a)
-    // })
-})
+// effect(function render2() {
+//     obj.b
+//     // effect(()=> {
+//     //     console.log(obj.c.a)
+//     // })
+// })
 
 // console.log(obj.__a_deps.length)
 
