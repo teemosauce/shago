@@ -67,7 +67,7 @@ function createSetter(shadow = false) {
     } else {
       hasKey = false; // 新增
     }
-    console.log(`把${key}从${oldValue}改成了${value}`);
+    // console.log(`把${key}从${oldValue}改成了${value}`);
     let result = Reflect.set(target, key, value, receiver);
 
     if (!hasKey) {

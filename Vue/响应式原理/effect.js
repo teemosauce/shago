@@ -61,7 +61,7 @@ function track(target, type, key) {
       deps.add(activeEffect);
     }
     // console.log(target, type, key, deps)
-    console.table(targetMap);
+    // console.table(targetMap);
     // Reflect.set(target, `__${key}_deps`, deps)
   }
 }
@@ -75,7 +75,7 @@ function track(target, type, key) {
  * @param {any} oldValue 旧值
  */
 function trigger(target, type, key, newValue, oldValue) {
-  console.log("trigger", type, key);
+//   console.log("trigger", type, key);
   let depsMap = targetMap.get(target);
   //   如果属性没有收集过依赖 什么都不做
   if (!depsMap) {
@@ -124,7 +124,7 @@ function trigger(target, type, key, newValue, oldValue) {
   }
 
   effectQueue.forEach((effect) => {
-    console.log(effect);
+    // console.log(effect);
     effect();
   });
 }

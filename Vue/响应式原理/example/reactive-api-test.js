@@ -1,6 +1,10 @@
 const { effect } = require('../effect')
 const { reactive, readonlyReactive, shadowReactive, shadowReadonlyReactive } = require('../reactive')
 
+// 响应式原理 总结起来就是这两句话
+// 1.调用effect函数时 传递的函数就相当于render函数， render函数中的所有属性都会收集该effect
+// 2. 当属性值发生变化时，该属性收集的所有effect都会重新执行
+
 let o = {
     a: 1,
     b: 2,
