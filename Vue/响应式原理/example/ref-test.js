@@ -1,5 +1,5 @@
-const { effect } = require('../effect.js')
-const { ref } = require('../ref.js')
+import { effect } from '../effect.js'
+import { ref } from '../ref.js'
 
 
 let flag = ref(true)

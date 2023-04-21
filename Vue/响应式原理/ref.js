@@ -1,12 +1,3 @@
-const { reactive } = require("./reactive")
+import { reactive } from "./reactive.js"
 
-function ref(value) {
-    let obj = {
-        value
-    }
-    return reactive(obj)
-}
-
-module.exports = {
-    ref
-}
+class RefI

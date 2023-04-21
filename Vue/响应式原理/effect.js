@@ -1,6 +1,6 @@
-const { isFunction, isArray, isIntegerKey } = require("./utils");
+import { isFunction, isArray, isIntegerKey } from "./utils.js";
 
-function effect(fn, options = {}) {
+export function effect(fn, options = {}) {
   if (!isFunction(fn)) {
     return fn;
   }
@@ -45,7 +45,7 @@ const targetMap = new WeakMap();
  * @param {String} type 类型
  * @param {String} key 对那个属性进行收集
  */
-function track(target, type, key) {
+export function track(target, type, key) {
   if (activeEffect) {
     let depsMap = targetMap.get(target);
     if (!depsMap) {
@@ -74,7 +74,7 @@ function track(target, type, key) {
  * @param {any} value 设置的值
  * @param {any} oldValue 旧值
  */
-function trigger(target, type, key, newValue, oldValue) {
+export function trigger(target, type, key, newValue, oldValue) {
 //   console.log("trigger", type, key);
   let depsMap = targetMap.get(target);
   //   如果属性没有收集过依赖 什么都不做
@@ -128,9 +128,3 @@ function trigger(target, type, key, newValue, oldValue) {
     effect();
   });
 }
-
-module.exports = {
-  effect,
-  track,
-  trigger,
-};

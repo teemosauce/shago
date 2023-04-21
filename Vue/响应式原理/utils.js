@@ -3,26 +3,18 @@
  * @param {Object} obj
  * @returns
  */
-const isObject = (obj) => typeof obj === "object" && obj !== null;
+export const isObject = (obj) => typeof obj === "object" && obj !== null;
 
-const isArray = Array.isArray;
-const isFunction = (fn) => typeof fn === "function";
+export const isArray = Array.isArray;
+export const isFunction = (fn) => typeof fn === "function";
 
 /**
  * 判断一个数字字符串是否为整数
  * @param {number} value
  * @returns
  */
-const isIntegerKey = (value) => {
+export const isIntegerKey = (value) => {
   return parseInt(value) + "" === value;
 };
 
-const hasChanged = (newValue, oldValue) => newValue !== oldValue;
-
-module.exports = {
-  isObject,
-  isArray,
-  isFunction,
-  isIntegerKey,
-  hasChanged,
-};
+export const hasChanged = (newValue, oldValue) => newValue !== oldValue;

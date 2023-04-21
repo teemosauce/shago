@@ -1,5 +1,22 @@
-let map = new WeakMap()
-let a = { a: 1 }
-map.set("avss", 1)
+function log(fn, descriptor) {
+    let { name } = descriptor
+    return function (...args) {
+        console.log("调用了", this, name, args)
+        return fn.apply(this, args)
+    }
+}
 
-console.log(map.get("avss"))
+class Person {
+    constructor(name) {
+        this.name = name
+    }
+    @log
+    hello() {
+        console.log(`${this.name} say hello`)
+    }
+}
+
+
+new Person("小明").hello("gogogo")
+
+

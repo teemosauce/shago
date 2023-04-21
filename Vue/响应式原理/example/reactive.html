@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reactive测试</title>
+
+    <style>
+        #app {
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: bisque;
+            border: 2px solid cornflowerblue;
+            position: relative;
+        }
+
+        .message {
+            --height: 220px;
+            overflow-y: auto;
+            height: var(--height);
+            /* background-color: #fff; */
+        }
+
+        .item {
+            margin-top: 10px;
+        }
+
+
+        .message-box {
+            position: absolute;
+            height: 80px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .message-input {
+            width: 80%;
+            height: 100%;
+            box-sizing: border-box;
+            border: none;
+        }
+
+        button {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align: center;">Vue响应式原理练习</h2>
+    <div id="app">
+        
+
+        <!-- 聊天区 -->
+        <div class="message">
+
+        </div>
+        <!-- 发送区 -->
+        <div class="message-box">
+            <input class="message-input">
+            <button>提交</button>
+        </div>
+    </div>
+
+    <script type="module" src="../reactive.js"></script>
+    <script type="module" src="../effect.js"></script>
+
+    <script type="module">
+        import { effect } from '../effect.js'
+        import { reactive, readonlyReactive, shadowReactive, shadowReadonlyReactive } from '../reactive.js'
+
+        // 声明一个响应式的对象
+        let user = reactive({
+            name: '',
+            messageList: []
+        })
+
+        //1. 调用effect函数 把render函数中所用到的属性和render函数关联起来 也就是搜集属性的effect函数
+        effect(function render() {
+            let $message = document.querySelector('.message');
+            $message.innerHTML = ''
+            user.messageList.forEach(message => {
+                let $div = document.createElement('div')
+                $div.classList.add('item')
+                $div.innerText = message
+                $message.append($div)
+            });
+        })
+
+        //2. 数据发生变化后，通知属性收集的effect函数 再次执行
+        document.querySelector('button').addEventListener('click', (e) => {
+            let $input = document.querySelector('.message-input')
+            user.messageList.push($input.value)
+            $input.value = ''
+        })
+    </script>
+</body>
+
+</html>

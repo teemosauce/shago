@@ -1,5 +1,6 @@
-const { track, trigger } = require("./effect");
-const { isArray, isObject, hasChanged, isIntegerKey } = require("./utils");
+import { track, trigger } from "./effect.js";
+import { isArray, isObject, hasChanged, isIntegerKey } from "./utils.js";
+import { reactive, readonlyReactive } from "./reactive.js";
 
 const get = createGetter(); // 深度代理的读方法
 const shadowGet = createGetter(true); // 浅代理读方法
@@ -37,7 +38,7 @@ function createGetter(shadow = false, readonly = false) {
       return result;
     }
     // 如果是深层代理 则需要根据是否为对象类型 递归代理
-    let { reactive, readonlyReactive } = require("./reactive");
+
     if (isObject(result)) {
       // 这里就能体现出Proxy相比Object.defineProperty的好处 这里只有当用到某属性的时候才会把某个属性变成响应式
       // 而defineProperty是一开始就遍历整个data数据，递归的把每一个属性都变成了响应式
@@ -80,21 +81,22 @@ function createSetter(shadow = false) {
   };
 }
 
-module.exports = {
-  handler: {
-    get,
-    set: set,
-  },
-  shadowHandler: {
-    get: shadowGet,
-    set: shadowSet,
-  },
-  readonlyHandler: {
-    get: readonlyGet,
-    set: readonlySet,
-  },
-  shadowReadonlyHandler: {
-    get: shadowReadonlyGet,
-    set: readonlySet,
-  },
-};
+export const handler = {
+  get,
+  set: set,
+}
+
+export const shadowHandler = {
+  get: shadowGet,
+  set: shadowSet,
+}
+
+export const readonlyHandler = {
+  get: readonlyGet,
+  set: readonlySet,
+}
+
+export const shadowReadonlyHandler = {
+  get: shadowReadonlyGet,
+  set: readonlySet,
+}

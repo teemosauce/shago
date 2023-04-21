@@ -1,13 +1,13 @@
 
-const { handler, shadowHandler, readonlyHandler, shadowReadonlyHandler } = require("./handlers")
-const { isObject, isArray, isInteger } = require("./utils")
+import { handler, shadowHandler, readonlyHandler, shadowReadonlyHandler } from "./handlers.js"
+import { isObject } from "./utils.js"
 
 // 四种创建代理的方法
 
-const reactive = createReactive(false, handler)
-const shadowReactive = createReactive(false, shadowHandler)
-const readonlyReactive = createReactive(true, readonlyHandler)
-const shadowReadonlyReactive = createReactive(true, shadowReadonlyHandler)
+export const reactive = createReactive(false, handler)
+export const shadowReactive = createReactive(false, shadowHandler)
+export const readonlyReactive = createReactive(true, readonlyHandler)
+export const shadowReadonlyReactive = createReactive(true, shadowReadonlyHandler)
 
 // function reactive(target) {
 //     return createReactive(target, false, handler)
@@ -54,10 +54,3 @@ function createReactive(readonly, handler) {
 // exports.shadowReactive = shadowReactive
 // exports.readonlyReactive = readonlyReactive
 // exports.shadowReadonlyReactive = shadowReadonlyReactive
-
-module.exports = {
-    reactive,
-    shadowReactive,
-    readonlyReactive,
-    shadowReadonlyReactive,
-}

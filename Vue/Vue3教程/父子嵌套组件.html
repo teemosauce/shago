@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3教程</title>
+    <script src="../libs/vue3.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .parent {
+            background-color: red;
+            height: 400px;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .child {
+            height: 200px;
+            width: 200px;
+            background-color: aquamarine;
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <parent></parent>
+    </div>
+
+    <script>
+        let { createApp, reactive, onMounted } = Vue;
+
+        let app = createApp({
+            setup(props) {
+                onMounted(() => {
+                    console.log("onMounted：应用挂载完毕")
+                })
+            }
+        })
+        app.component('Parent', {
+            setup() {
+
+            },
+            template: `
+                <div class="parent">
+                    <div>这是父组件</div>
+                    <child></child>
+                </div>
+            `
+        })
+
+        app.component('Child', {
+            setup() {
+            },
+            template: `
+                <div class="child">
+                    <div>这是子组件</div>
+                </div>
+            `
+        })
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

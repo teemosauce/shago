@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3教程</title>
+    <script src="../libs/vue3.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <page-list></page-list>
+    </div>
+
+    <script>
+        let { createApp, reactive, onMounted } = Vue;
+
+        let app = createApp({
+            setup(props) {
+                onMounted(() => {
+                    console.log("onMounted：应用挂载完毕")
+                })
+            }
+        })
+        app.component('PageList', {
+            setup() {
+                let pages = reactive([{
+                    title: '基本用法',
+                    url: './index.html'
+                }, {
+                    title: '父子嵌套组件',
+                    url: './父子嵌套组件.html'
+                }, {
+                    title: '父子组件的数据通信',
+                    url: './父子组件的数据通信.html'
+                }])
+                return {
+                    pages
+                }
+            },
+            template: `
+                <ul>
+                    <li v-for="page in pages">
+                      <a :href="page.url">{{ page.title }}</a>  
+                    </li>
+                </ul>
+            `
+        })
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
