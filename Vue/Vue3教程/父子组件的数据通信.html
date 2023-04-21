@@ -32,6 +32,11 @@
             background-color: aquamarine;
             margin-top: 100px;
             margin-left: 100px;
+            word-wrap: break-word;
+        }
+
+        .input {
+            width: 200px;
         }
     </style>
 </head>
@@ -65,8 +70,11 @@
                     }
                 }
 
+                let content = ref('')
+
                 return {
                     flag,
+                    content,
                     changeFlag
                 }
             },
@@ -74,19 +82,25 @@
                 <div class="parent">
                     <div>这是父组件</div>
                     <button style="display:none;" @click="changeFlag()">{{ flag ? "隐藏" : "显示" }}</button>
-                    <ui-switch :flag="flag" @changed="changeFlag"></ui-switch>
-                    <child :flag="flag"></child>
+                    <ui-switch :flag="flag" @changed="changeFlag" style="display:inline-block;"> 
+                    </ui-switch>
+                    <span>{{ flag ? '显示' : '隐藏' }}子组件</span>
+                    <div>
+                        <input class="input" type="text" v-model="content" placeholder="输入内容自动同步到子组件"/>
+                    </div>
+                    <child :flag="flag" :content="content"></child>
                 </div>
             `
         })
 
         app.component('Child', {
-            props: ['flag'],
+            props: ['flag', 'content'],
             setup() {
             },
             template: `
                 <div class="child" v-show="flag">
                     <div>这是子组件</div>
+                    <div>同步父组件输入的数据：{{content}}</div>
                 </div>
             `
         })

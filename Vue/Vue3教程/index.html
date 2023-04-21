@@ -15,7 +15,7 @@
     </div>
 
     <script>
-        let { createApp, reactive, onMounted } = Vue;
+        let { createApp, reactive, onMounted, readonly } = Vue;
 
         let app = createApp({
             setup(props) {
@@ -26,15 +26,14 @@
         })
         app.component('PageList', {
             setup() {
-                let pages = reactive([{
+                let pages = readonly([{
                     title: '基本用法',
-                    url: './index.html'
                 }, {
                     title: '父子嵌套组件',
-                    url: './父子嵌套组件.html'
                 }, {
                     title: '父子组件的数据通信',
-                    url: './父子组件的数据通信.html'
+                }, {
+                    title: '组件插槽的用法',
                 }])
                 return {
                     pages
@@ -43,7 +42,7 @@
             template: `
                 <ul>
                     <li v-for="page in pages">
-                      <a :href="page.url">{{ page.title }}</a>  
+                      <a :href="'./' + page.title + '.html'">{{ page.title }}</a>  
                     </li>
                 </ul>
             `

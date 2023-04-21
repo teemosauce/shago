@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件插槽的用法</title>
+    <script src="../libs/vue3.js"></script>
+
+    <style>
+        .card-header {
+            height: 50px;
+            background-color: aquamarine;
+        }
+
+        .card-footer {
+            height: 50px;
+            background-color: aquamarine;
+        }
+
+        .card-content {
+            height: 400px;
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+    <script>
+        let { createApp, ref, resolveComponent, openBlock, createBlock } = Vue
+
+        let app = createApp({
+            setup() {
+                return function (ctx) {
+                    console.log(ctx)
+                    const app = resolveComponent("app")
+                    return (openBlock(), createBlock(app))
+                }
+            },
+            // template: '<app />'
+        })
+
+
+        // APP 组件
+
+        app.component('App', {
+            setup() {
+                let title = ref('go')
+                return {
+                    title
+                }
+            },
+
+            template: `
+                <card>
+                    <template #header>
+                        标题
+                    </template> 
+                    <template #content>
+                        <span>内容区</span>
+                    </template>   
+                    
+                    <template #footer>
+                        按钮
+                    </template>   
+                </card>
+            `
+        })
+
+
+        app.component('Card', {
+            setup() {
+                console.log()
+            },
+
+            template: `
+            <div class="card">
+                <div class="card-header">
+                    <slot name="header"></slot>
+                </div>
+                <div class="card-content">
+                    <slot name="content"></slot>
+                </div>
+                <div class="card-footer">
+                    <slot name="footer"></slot>
+                </div>    
+            </div>
+            `
+        })
+
+        app.mount('#app')
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
