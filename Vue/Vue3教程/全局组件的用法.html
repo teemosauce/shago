@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>全局组件</title>
     <script src="../libs/vue3.js"></script>
+    <script src="../libs/@vueuse/shared.js"></script>
+    <script src="../libs/@vueuse/core.js"></script>
+    <script src="../libs/@vueuse/math.js"></script>
     <style>
         .message {
             display: inline-block;
@@ -22,25 +25,51 @@
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+    </div>
     <script>
-        let { createApp, getCurrentInstance } = Vue
+        let { createApp, getCurrentInstance, defineComponent, reactive, ref, computed } = Vue
+
+        let { useMax } = VueUse;
 
         let app = createApp({
             setup() {
                 let instanceProxy = getCurrentInstance().proxy
+
+                let items = reactive([10, 18, 9, 2])
+
+
+                let maxItem = useMax(items);
+
+
+                // useMax 相当于下面的写法
+                let max = computed(() => {
+                    console.log(5555)
+                    return Math.max.apply(null, items)
+                })
+
                 return {
+                    max,
+                    maxItem,
                     showMessage() {
+                        items.push(20)
                         instanceProxy.$message('你很帅！')
                     }
                 }
             },
-            template: '<button @click="showMessage">弹出消息</button>'
+            template: `
+                <div>
+                    <div>{{max}}</div>
+                    <div>{{maxItem}}</div>
+                    <button @click="showMessage">弹出消息</button>
+                </div>`
         })
 
         let Message = defineComponent({
-            name: '',
-            
+            name: 'Message',
+            setup() {
+
+            },
         })
 
         app.config.globalProperties.$message = function (message) {
