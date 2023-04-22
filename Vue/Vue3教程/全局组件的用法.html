@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局组件</title>
+    <script src="../libs/vue3.js"></script>
+    <style>
+        .message {
+            display: inline-block;
+            position: fixed;
+            width: 100px;
+            background-color: antiquewhite;
+            font-size: 14px;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        let { createApp, getCurrentInstance } = Vue
+
+        let app = createApp({
+            setup() {
+                let instanceProxy = getCurrentInstance().proxy
+                return {
+                    showMessage() {
+                        instanceProxy.$message('你很帅！')
+                    }
+                }
+            },
+            template: '<button @click="showMessage">弹出消息</button>'
+        })
+
+        let Message = defineComponent({
+            name: '',
+            
+        })
+
+        app.config.globalProperties.$message = function (message) {
+            let $message = document.querySelector('.message')
+            if ($message) {
+                $message.innerHTML = message
+            } else {
+                $message = document.createElement('div')
+                $message.innerHTML = message
+                $message.classList.add('message')
+                document.body.append($message)
+            }
+            $message.style.display = 'inline-block'
+
+            if ($message.timer) {
+                clearTimeout($message.timer)
+                $message.timer = undefined
+            }
+            $message.timer = setTimeout(() => {
+                $message.style.display = 'none'
+                $message.timer = undefined
+            }, 3000)
+        }
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

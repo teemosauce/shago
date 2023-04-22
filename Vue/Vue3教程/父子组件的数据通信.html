@@ -82,7 +82,16 @@
                 <div class="parent">
                     <div>这是父组件</div>
                     <button style="display:none;" @click="changeFlag()">{{ flag ? "隐藏" : "显示" }}</button>
-                    <ui-switch :flag="flag" @changed="changeFlag" style="display:inline-block;"> 
+                    <ui-switch :flag="flag" @changed="changeFlag" style="display:inline-block;">
+                        <template #header>
+                            <div>哈哈哈</div>
+                        </template>
+                        
+                        <div>
+                            <div>1</div>
+                            <div>2</div>    
+                        </div>
+                        <span>3</span>
                     </ui-switch>
                     <span>{{ flag ? '显示' : '隐藏' }}子组件</span>
                     <div>
@@ -94,7 +103,15 @@
         })
 
         app.component('Child', {
-            props: ['flag', 'content'],
+            props: {
+                flag: {
+                    type: Boolean,
+                    default: false
+                },
+                content: {
+                    type: String
+                }
+            },
             setup() {
             },
             template: `

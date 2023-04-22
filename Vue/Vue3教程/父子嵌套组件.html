@@ -42,7 +42,7 @@
     </div>
 
     <script>
-        let { createApp, reactive, onMounted } = Vue;
+        let { createApp, reactive, onMounted, getCurrentInstance, defineComponent } = Vue;
 
         let app = createApp({
             setup(props) {
@@ -51,17 +51,34 @@
                 })
             }
         })
-        app.component('Parent', {
-            setup() {
 
+        app.config.globalProperties.$where = function () {
+            console.log('show message')
+        }
+
+
+        let Parent = defineComponent({
+            name: 'Parent',
+            setup() {
+                onMounted(() => {
+                    console.log(getCurrentInstance().proxy.$el)
+                })
+
+                return {
+                    show() {
+                        console.log(7777)
+                    }
+                }
             },
             template: `
                 <div class="parent">
-                    <div>这是父组件</div>
+                    <div @click="show">这是父组件</div>
                     <child></child>
                 </div>
             `
         })
+        console.log(Parent)
+        app.component('Parent', Parent)
 
         app.component('Child', {
             setup() {
