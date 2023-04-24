@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由使用</title>
+    <script src="../libs/vue.js"></script>
+    <script src="../libs/vue-router3.6.5.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        let Page1 = {
+            template: '<div>我是页面1</div>'
+        }
+
+        let Page2 = {
+            template: `
+                <div>
+                    <div>我是页面2</div>
+                    <router-view></router-view>
+                </div>
+            `
+        }
+        // Vue.component('Page1', Page1)
+        // Vue.component('Page2', Page2)
+
+        let Sub1 = {
+            template: '<div>我是页面2中的片段1</div>'
+        }
+
+        let Sub2 = {
+            template: '<div>我是页面2中的片段2</div>'
+        }
+        // debugger
+        let router = new VueRouter({
+            // mode: 'history',
+            routes: [{
+                path: '/',
+                redirect: '/page1'
+            }, {
+                path: '/page1',
+                component: Page1
+            }, {
+                path: '/page2',
+                component: Page2,
+                children: [{
+                    path: 'sub1',
+                    component: Sub1,
+                }, {
+                    path: 'sub2',
+                    component: Sub2,
+                }]
+            }]
+        })
+        let app = new Vue({
+            router,
+            data() {
+                return {
+                    title: '路由的使用'
+                }
+            },
+            template: `
+            <div>
+                <div>{{title}}</div>
+                <ul>
+                    <li>
+                        <router-link to="page1">Page1</router-link>
+                    </li>
+                    <li>
+                        <router-link to="page2">Page2</router-link>
+                    </li>
+                    <li>
+                        <router-link to="page2/sub1">Page2 Sub1</router-link>
+                    </li>  
+                    <li>
+                        <router-link to="page2/sub2">Page2 Sub2</router-link>
+                    </li>   
+                </ul>
+
+                <router-view></router-view>
+            </div>
+            `
+        })
+
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #feffff;
+            /* background-color: rgb(45, 45, 45); */
+            gap: 30px;
+        }
+
+        .img {
+            width: 100px;
+            height: 100px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            /* background-color: #feffff; */
+            display: flex;
+            box-shadow:
+                18px 18px 30px rgba(0, 0, 0, .2),
+                -18px -18px 30px rgba(255, 255, 255, 1);
+            transition: all .2s ease-out;
+        }
+
+        .img:hover {
+            cursor: pointer;
+            box-shadow:
+                0 0 0 rgba(0, 0, 0, .2),
+                0 0 0 rgba(0, 0, 0, .8),
+                inset 18px 18px 30px rgba(0, 0, 0, .1),
+                inset -18px -18px 30px rgba(255, 255, 255, 1);
+        }
+
+        .img img {
+            width: 60px;
+            /* transition: all .2s ease-out; */
+            transition: inherit;
+            /* height: 60px; */
+        }
+
+        .img:hover img {
+            width: 48px;
+            /* height: 48px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="img">
+            <img src="./douyin.png" alt="抖音">
+        </div>
+
+        <div class="img">
+            <img src="./weixin.png" alt="微信">
+        </div>
+
+        <div class="img">
+            <img src="./alipay.png" alt="支付宝">
+        </div>
+
+        <div class="img">
+            <img src="./taobao.png" alt="淘宝">
+        </div>
+    </div>
+</body>
+
+</html>

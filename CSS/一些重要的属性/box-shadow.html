@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(45, 45, 45, 1);
+            gap: 50px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            background-color: coral;
+            --color1: red;
+            --color2: green;
+            text-align: center;
+            color: #fff;
+            line-height: 100px;
+        }
+
+        .box1 {
+            /*有投影，无渐变  第三个值设为0 */
+            box-shadow: 10px 10px 0 var(--color1);
+
+        }
+
+        .box2 {
+            /*有投影，有渐变 第三个值设置一个数 */
+            box-shadow: 10px 10px 10px var(--color1);
+
+        }
+
+        .box3 {
+            /*无投影，有渐变 前两个值设为0 */
+            box-shadow: 0 0 100px var(--color1);
+
+        }
+
+        .box4 {
+            /* 多投影 从效果可以看出来 有多个投影效果时，最先设置的投影优先级最高 层叠顺序是倒着来的*/
+            box-shadow:
+                -10px 10px 10px var(--color2),
+                10px 10px 10px var(--color1),
+                10px -10px 10px var(--color2),
+                -10px 10px 10px var(--color2),
+                -10px -10px 10px var(--color1);
+        }
+
+
+        .box5 {
+            /* 设置渐变的半径*/
+            box-shadow: 10px 10px 10px 10px var(--color1);
+              
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="box box1">
+            有投影，无渐变
+        </div>
+
+        <div class="box box2">
+            有投影，有渐变
+        </div>
+
+        <div class="box box3">
+            无投影，有渐变
+        </div>
+
+        <div class="box box4">
+            多投影
+        </div>
+
+        <div class="box box5">
+            渐变的半径
+        </div>
+    </div>
+</body>
+
+</html>
