@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS开关</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            transition: all .2s linear;
+        }
+
+        body[data-theme=aquamarine] {
+            background-color: aquamarine;
+        }
+
+        body[data-theme=orange] {
+            background-color: orange;
+        }
+
+
+        .switch-container {
+            --width: 80px;
+            --height: calc(var(--width) / 2);
+            --padding: 4px;
+        }
+
+
+        #checkbox {
+            display: none;
+        }
+
+        .switch {
+            display: inline-block;
+            width: var(--width);
+            height: var(--height);
+            background-color: darkgray;
+            border-radius: calc(var(--height) / 2);
+            box-sizing: border-box;
+            padding: var(--padding)
+        }
+
+        .switch::after {
+            display: block;
+            box-sizing: border-box;
+            content: '';
+            width: 50%;
+            height: 100%;
+            background-color: tomato;
+            left: 0;
+            position: relative;
+            border-radius: 50%;
+            transition: all .2s linear;
+
+        }
+
+        #checkbox:checked+.switch::after {
+            left: 50%;
+        }
+    </style>
+</head>
+
+<body data-theme="aquamarine">
+    <div class="switch-container">
+        <input type="checkbox" id="checkbox">
+        <label class="switch" for="checkbox"></label>
+    </div>
+
+    <script>
+        document.querySelector('#checkbox').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.setAttribute('data-theme', 'orange')
+            } else {
+                document.body.setAttribute('data-theme', 'aquamarine')
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变文字</title>
+
+    <style>
+        body {
+            margin: 0;
+            border: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: antiquewhite;
+        }
+
+        .text {
+            background-color: brown;
+            /* color: #fff; */
+            color: transparent;
+            font-size: 50px;
+            /* border: 10px red dashed; */
+            /* background-clip: padding-box; */
+            background-image: linear-gradient(90deg, rgba(35, 215, 28, 1) 0%, rgba(156, 21, 44, 1) 33%, rgba(167, 78, 15, 1) 65%, rgba(196, 0, 255, 1) 100%);
+            -webkit-background-clip: text;
+            animation: change .2s infinite ease-in;
+        }
+
+
+        @keyframes change {
+            25% {
+                background-image: linear-gradient(90deg, rgba(85, 93, 28, 1) 0%, rgba(56, 221, 44, 1) 33%, rgba(160, 72, 15, 1) 65%, rgba(196, 0, 25, 1) 100%);
+            }
+
+            50% {
+                background-image: linear-gradient(90deg, rgba(25, 15, 28, 1) 0%, rgba(126, 212, 64, 1) 33%, rgba(227, 70, 155, 1) 65%, rgba(196, 0, 255, 1) 100%);
+            }
+
+            100% {
+                background-image: linear-gradient(90deg, rgba(35, 125, 128, 1) 0%, rgba(56, 212, 144, 1) 33%, rgba(67, 178, 51, 1) 65%, rgba(196, 0, 255, 1) 100%);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="text">
+        我是会渐变的文字
+    </div>
+</body>
+
+</html>
