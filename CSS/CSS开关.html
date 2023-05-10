@@ -17,14 +17,15 @@
             width: 100vw;
             height: 100vh;
             transition: all .2s linear;
+            background-color: var(--main-color);
         }
 
         body[data-theme=aquamarine] {
-            background-color: aquamarine;
+            --main-color: aquamarine;
         }
 
         body[data-theme=orange] {
-            background-color: orange;
+            --main-color: orange;
         }
 
 
@@ -66,6 +67,13 @@
         #checkbox:checked+.switch::after {
             left: 50%;
         }
+
+
+        .color-picker {
+            position: fixed;
+            right: 20px;
+            top: 20px
+        }
     </style>
 </head>
 
@@ -75,13 +83,24 @@
         <label class="switch" for="checkbox"></label>
     </div>
 
+    <div class="color-picker">
+        <input type="color" id="colorPicker">
+    </div>
     <script>
         document.querySelector('#checkbox').addEventListener('change', (e) => {
             if (e.target.checked) {
+                
                 document.body.setAttribute('data-theme', 'orange')
+                document.body.style.setProperty('--main-color', 'orange')
             } else {
                 document.body.setAttribute('data-theme', 'aquamarine')
+                document.body.style.setProperty('--main-color', 'aquamarine')
             }
+        })
+
+        document.querySelector('#colorPicker').addEventListener('input', (e) => {
+            let color = e.target.value
+            document.body.style.setProperty('--main-color', color)
         })
     </script>
 </body>
