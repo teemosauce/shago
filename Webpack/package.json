@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx webpack",
+    "build:production": "npx webpack --node-env production",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,6 +16,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.4",
     "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.23",
     "postcss-loader": "^7.3.0",
     "postcss-preset-env": "^8.3.2",

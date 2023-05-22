@@ -2,15 +2,41 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CDNWebpackPlugin = require('./plugins/cdn-webpack-plugin')
+const HooksWebpackPlugin = require('./plugins/hooks-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-console.log(CDNWebpackPlugin)
+
+console.log(process.env.NODE_ENV)
+const devMode = process.env.NODE_ENV !== "production"
 
 function resolve(name) {
     return path.resolve(__dirname, name)
 }
 
+let plugins = [
+    new CleanWebpackPlugin(), // 清空构建目录
+    new HtmlWebpackPlugin({ // 自动将打包后的代码注入到html页面中
+        template: path.join(__dirname, 'index.html')
+    }),
+    new CDNWebpackPlugin({ // 自定义测试插件 把下面的CDN内容添加到html页面中
+        styles: [
+            'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+        ],
+        scripts: [
+            'https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js',
+            'https://unpkg.com/element-ui/lib/index.js'
+        ]
+    }),
+    new HooksWebpackPlugin(), // 自定义测试插件 测试常见的hook
+]
+
+if (!devMode) {
+    plugins.push(new MiniCssExtractPlugin())// 生产环境时，提取css到单独的文件
+}
+
+
 module.exports = {
-    mode: 'development', // production development
+    mode: devMode ? 'development' : 'production', // production development
     // target: 'async-node',
     // 入口文件配置
     devServer: {
@@ -44,18 +70,21 @@ module.exports = {
         // 对不同文件处理的loader 
         rules: [
             {
-                test: /\.css$/, // 匹配文件类型
+                test: /\.(sa|sc|c)ss$/, // 匹配文件类型
                 // 要使用的loader use数组中 loader执行的顺序是从后往前
                 use: [{
-                    loader: 'style-loader'
+                    loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,  // 把CSS插入到DOM中
+                    options: devMode ? {} : {
+                        esModule: false,
+                    },
                 }, {
-                    loader: 'css-loader',
+                    loader: 'css-loader', // 识别css模板
                     options: {
                         modules: false,
                         // url: true 
                     }
                 }, {
-                    loader: 'postcss-loader',
+                    loader: 'postcss-loader', // css兼容处理
                     options: {
                         postcssOptions: {
                             plugins: [['postcss-preset-env', {
@@ -75,19 +104,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: 'index.html'
-        }),
-        new CDNWebpackPlugin({
-            styles: [
-                'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
-            ],
-            scripts: [
-                'https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js',
-                'https://unpkg.com/element-ui/lib/index.js'
-            ]
-        })
-    ]
+    plugins
 }
