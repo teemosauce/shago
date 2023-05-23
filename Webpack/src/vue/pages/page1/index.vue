@@ -6,5 +6,6 @@
 <style lang="scss" scoped>
     .page2 {
         color: green;
+        text-align: center;
     }
 </style>

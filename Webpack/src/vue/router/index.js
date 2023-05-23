@@ -12,13 +12,13 @@ const routes = [{
 },{
     path: '/page1',
     component: ()=> {
-        return import('@/vue/pages/page1/index.vue')
+        return import(/* webpackChunkName: "page1" */ '@/vue/pages/page1/index.vue')
     },
     name: 'page1'
 }, {
     path: '/page2',
     component: () => {
-        return import('@/vue/pages/page2/index.vue')
+        return import(/* webpackChunkName: "page2" */ '@/vue/pages/page2/index.vue')
     },
     name: 'page2'
 }]

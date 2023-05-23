@@ -141,7 +141,7 @@ module.exports = {
         rules: [{
             test: /\.vue$/,
             use: [{
-                loader: 'vue-loader'
+                loader: 'vue-loader' 
             }]
         }, {
             test: /\.(sa|sc|c)ss$/, // 匹配文件类型
