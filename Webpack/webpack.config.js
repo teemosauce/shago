@@ -50,13 +50,7 @@ let plugins = [
     }),
     // 自己写CDN的插件 
     // new CDNWebpackPlugin({ // 自定义测试插件 把下面的CDN内容添加到html页面中
-    //     styles: [
-    //         'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
-    //     ],
-    //     scripts: [
-    //         'https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.runtime.min.js',
-    //         'https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/index.min.js'
-    //     ]
+    //     cdns
     // }),
     new HooksWebpackPlugin(), // 自定义测试插件 测试常见的hook
     new VueLoaderPlugin(), // 支持vue

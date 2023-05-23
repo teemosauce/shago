@@ -6,12 +6,13 @@ const { Compilation, sources, container } = require("webpack")
 
 const PLUGIN_ID = 'cdn-webpack-plugin'
 class CDNWebpackPlugin {
-    constructor(options = { scripts: [], styles: [] }) {
-        let importStyles = options.styles.map(src => {
+    constructor(options = { cdns: { js: [], css: [] } }) {
+        // 拼接css资源和js资源为字符串
+        let importStyles = options.cdns.css.map(src => {
             return `<link rel="stylesheet" href="${src}">`
         })
 
-        let importScripts = options.scripts.map(src => {
+        let importScripts = options.cdns.js.map(src => {
             return `<script type="text/javascript" src="${src}"></script>`
         })
 
@@ -21,22 +22,24 @@ class CDNWebpackPlugin {
 
     apply(compiler) {
         console.log(`${PLUGIN_ID} apply`);
+        // 编译器编译阶段的钩子
         compiler.hooks.thisCompilation.tap(PLUGIN_ID, (compilation) => {
             console.log(`${PLUGIN_ID} thisCompilation`);
+            // 编译处理资源的钩子
             compilation.hooks.processAssets.tapAsync({
                 name: PLUGIN_ID,
                 stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
                 additionalAssets: true
             }, (assets, callback) => {
                 console.log(`${PLUGIN_ID} processAssets`);
-                // 只过滤html文件资源
-                
                 for (let filename in assets) {
+                     // 只处理html文件资源
                     if (filename.endsWith('.html')) {
-                        console.log(`***********${filename}***********`)
                         let asset = compilation.getAsset(filename)
+                        // 获取html里面的内容
                         let source = asset.source.source()
-                        console.log(`***********${source}***********`)
+
+                        // 把CDN 模块替换成真正的资源
                         let content = source.replace('<!-- CDN RESOURCES -->', this.cdnResourcesTemplate)
                         compilation.updateAsset(filename, new sources.RawSource(content))
                     }
