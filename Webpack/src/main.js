@@ -1,16 +1,28 @@
-import { getDate } from "./utils";
+import { getDate } from "@/utils";
 
-import './style/common.css'
+import '@/style/common.scss'
 
 import content from './what.abc'
 
 import Vue from 'vue'
 
-function printDate() {
-    console.log(getDate())
+import ElementUI from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
+
+import App from '@/vue/app.vue'
+import router from '@/vue/router'
+// 开发环境才需要use 生产环境引用CDN资源
+
+if (process.env.NODE_ENV !== 'production') {
+    // 如果用了CDN的资源 这里就不能再使用use了 因为ElementUI和暴露再window上的对象名称不一样 会报ElementUI未定义的错误
+    Vue.use(ElementUI)
 }
 
-function run() {
+function printDate() {
+    console.log(getDate() + 2)
+}
+
+function bootstrap() {
     printDate()
 
     document.onreadystatechange = (ev) => {
@@ -19,42 +31,17 @@ function run() {
 
     window.onload = (e) => {
         document.getElementById('title').addEventListener('click', (e) => {
-            e.target.innerText = content
+            e.target.innerText = `通过一个自定义的loader获取一个特殊文件里面的内容${content}`
         })
     }
 
-    console.log(777)
-
-
     new Vue({
-        data() {
-            return {
-                title: '我是一个VUE应用',
-                nowTime: ''
-            }
-        },
-        template: `
-        <div class="vue-container">
-            <h1>{{title}}</h1>
-            <button @click="showTime">点击查看时间</button>
-            <div class="time">{{nowTime}}</div>
-        </div>`,
-        methods: {
-            showTime() {
-                if (!this.timer) {
-                    this.nowTime = new Date().toLocaleString()
-                    this.timer = setInterval(() => {
-                        this.nowTime = new Date().toLocaleString()
-                    }, 1000)
-                }
-            }
-        },
-        beforeDestroyed() {
-            console.log("beforeDestroyed")
-            clearInterval(this.timer)
+        router,
+        render(h) {
+            return h(App)
         },
         el: '#vueApp'
     })
 }
 
-run()
+bootstrap()

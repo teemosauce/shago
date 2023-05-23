@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webpack初体验</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
 
+    <% htmlWebpackPlugin.options.cdnConfig.css.forEach(src => { %>
+        <link href="<%= src %>" rel="stylesheet" />
+    <% }) %> 
     <!-- CDN RESOURCES -->
+    <% htmlWebpackPlugin.options.cdnConfig.js.forEach(src => { %>
+        <script type="text/javascript" src="<%= src %>"></script>
+    <% }) %> 
 </head>
 <body>
     <div class="container">

@@ -30,11 +30,13 @@ class CDNWebpackPlugin {
             }, (assets, callback) => {
                 console.log(`${PLUGIN_ID} processAssets`);
                 // 只过滤html文件资源
-                console.log(assets)
+                
                 for (let filename in assets) {
                     if (filename.endsWith('.html')) {
+                        console.log(`***********${filename}***********`)
                         let asset = compilation.getAsset(filename)
                         let source = asset.source.source()
+                        console.log(`***********${source}***********`)
                         let content = source.replace('<!-- CDN RESOURCES -->', this.cdnResourcesTemplate)
                         compilation.updateAsset(filename, new sources.RawSource(content))
                     }
