@@ -1,0 +1,25 @@
+{
+  "name": "rollup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/test.cjs.js",
+  "module": "dist/test.esm.js",
+  "browser": "dist/test.umd.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "npx rollup -c",
+    "dev": "npx rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "rollup": "^3.23.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
