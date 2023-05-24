@@ -1,7 +1,8 @@
 import { print } from "./print"
+// import moment from "moment/moment"
 
 export const getDate = () => {
-    return new Date().toLocaleDateString()
+    // return moment().format('YYYY年MMMMDo , h:mm:ss a')
 }
 
 export const getTime = () => Date.now()

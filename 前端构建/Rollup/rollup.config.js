@@ -11,21 +11,43 @@ module.exports = [
     {
         input: 'src/main.js',
         output: {
-            name: 'test',
+            name: 'testa',
             file: pkg.browser,
             format: 'umd'
         },
         plugins: [
-            resolve(), // so Rollup can find `ms`
-            commonjs() // so Rollup can convert `ms` to an ES module
+            resolve(), // 从node_modules中查找模块
+            commonjs() // 把 CommonJS 模块转成ES6
         ]
     },
     {
         input: 'src/main.js',
-        // external: ['lodash'],
+        external: [
+            /node_modules/
+        ], // 排除node_modules下面的包
         output: [
             { file: pkg.main, format: 'cjs' },
             { file: pkg.module, format: 'es' }
+        ]
+    },
+    {
+        input: 'src/main.js',
+        output: {
+            name: 'test',
+            globals: 'window',
+            file: 'dist/test.iife.js',
+            format: 'iife',
+        },
+    },
+    {
+        input: 'src/main.js',
+        output: {
+            file: 'dist/test.amd.js',
+            format: 'amd',
+        },
+        plugins: [
+            resolve(), // 从node_modules中查找模块
+            commonjs() // 把 CommonJS 模块转成ES6
         ]
     }
 ]
