@@ -12,13 +12,17 @@ const routes = [{
 },{
     path: '/page1',
     component: ()=> {
-        return import(/* webpackChunkName: "page1" */ '@/vue/pages/page1/index.vue')
+        return new Promise((resolve)=> {
+            setTimeout(()=> {
+                resolve(import(/* webpackChunkName: "async-page1" */ '@/vue/pages/page1/index.vue'))
+            }, 3000)
+        })
     },
     name: 'page1'
 }, {
     path: '/page2',
     component: () => {
-        return import(/* webpackChunkName: "page2" */ '@/vue/pages/page2/index.vue')
+        return import(/* webpackChunkName: "async-page2" */ '@/vue/pages/page2/index.vue')
     },
     name: 'page2'
 }]

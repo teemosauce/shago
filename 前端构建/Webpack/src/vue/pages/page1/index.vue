@@ -7,5 +7,6 @@
     .page2 {
         color: green;
         text-align: center;
+        height: 400px;
     }
 </style>

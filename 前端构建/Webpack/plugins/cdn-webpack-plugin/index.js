@@ -7,6 +7,7 @@ const { Compilation, sources, container } = require("webpack")
 const PLUGIN_ID = 'cdn-webpack-plugin'
 class CDNWebpackPlugin {
     constructor(options = { cdns: { js: [], css: [] } }) {
+        console.log(options)
         // 拼接css资源和js资源为字符串
         let importStyles = options.cdns.css.map(src => {
             return `<link rel="stylesheet" href="${src}">`
@@ -34,6 +35,7 @@ class CDNWebpackPlugin {
                 console.log(`${PLUGIN_ID} processAssets`);
                 for (let filename in assets) {
                      // 只处理html文件资源
+                    console.log(`${PLUGIN_ID} ---------------- ${filename}`)
                     if (filename.endsWith('.html')) {
                         let asset = compilation.getAsset(filename)
                         // 获取html里面的内容

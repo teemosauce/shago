@@ -7,7 +7,10 @@
     <router-link to="/page1">go page1</router-link>
     <router-link to="/page2">go page2</router-link>
 
-    <router-view></router-view>
+    <transition name="slide" enter-class="enter-class" leave-class="leave-class">
+        <router-view></router-view>
+    </transition>
+    
   </div>
 </template>
 <script>
@@ -43,5 +46,13 @@ $color:red;
 .vue-container {
   border: 10px solid $color;
   background-color: lightpink;
+}
+
+
+.enter-class {
+    background-color: lightcoral;
+}
+.leave-class {
+    background-color: lightgreen;
 }
 </style>

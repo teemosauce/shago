@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CDNWebpackPlugin = require('./plugins/cdn-webpack-plugin')
 const HooksWebpackPlugin = require('./plugins/hooks-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -21,43 +21,44 @@ let cdns = {
 }
 let externals = {
 }
-if (!isDev) {
-    cdns = {
-        css: [
-            // 'https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/theme-chalk/index.min.css' // 暂时还未找到css加速的办法 现在是如果js模块中也引用了该css 那么会造成引用两次的问题
-        ],
-        js: [
-            'https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.runtime.min.js',
-            'https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/index.min.js'
-        ]
-    }
-    externals = {
-        // 这里的key对应的包名 例如package.json依赖中安装时的名字
-        // value指的是该依赖内容执行后挂载到window全局对象上的名字
-        vue: 'Vue',  //生产环境排除CDN资源
-        'element-ui': 'Element'  //
-    }
-}
 
+// 采用这种方式可以加载CDN资源
+// if (!isDev) {
+//     cdns = {
+//         css: [
+//             'https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/theme-chalk/index.min.css' // 暂时还未找到css加速的办法 现在是如果js模块中也引用了该css 那么会造成引用两次的问题
+//         ],
+//         js: [
+//             'https://cdn.bootcdn.net/ajax/libs/vue/2.7.9/vue.runtime.min.js',
+//             'https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/index.min.js'
+//         ]
+//     }
+//     externals = {
+//         // 这里的key对应的包名 例如package.json依赖中安装时的名字
+//         // value指的是该依赖内容执行后挂载到window全局对象上的名字
+//         vue: 'Vue',  //生产环境排除CDN资源
+//         'element-ui': 'Element'  //
+//     }
+// }
 
 let plugins = [
-    new CleanWebpackPlugin(), // 清空构建目录
+    // new CleanWebpackPlugin(), // 清空构建目录
     new HtmlWebpackPlugin({ // 自动将打包后的代码注入到html页面中
-        template: resolve('index.html'),
+        template: resolve('template/index.html'), // 使用index-cdn.html
         title: 'Webpack学习',
         // 生产环境使用CDN资源 原理就是在html页面中拿到这些参数 使用模板渲染引擎去把这些资源渲染出来
-        cdnConfig: cdns
+        // cdnConfig: cdns 
     }),
     // 自己写CDN的插件 
-    // new CDNWebpackPlugin({ // 自定义测试插件 把下面的CDN内容添加到html页面中
-    //     cdns
-    // }),
+    new CDNWebpackPlugin({ // 自定义测试插件 把下面的CDN内容添加到html页面中
+        cdns
+    }),
     new HooksWebpackPlugin(), // 自定义测试插件 测试常见的hook
     new VueLoaderPlugin(), // 支持vue
 
     // new BundleAnalyzerPlugin(), // 打包分析插件
 
-    // 
+    // 定义常量 可以在编码时直接使用这里定义的常量 webpack编译时，会把代码中遇到的该常量直接替换成具体得值
     new DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development') // 把打包的环境信息注入到代码内
@@ -95,6 +96,7 @@ module.exports = {
         compress: true, // 启动gzip压缩
         open: true, // 自动打开
     },
+    // devtool: 'source-map',
     context: resolve('src'),
     entry: {
         main: './main.js',
@@ -115,13 +117,30 @@ module.exports = {
          * 2. 由于采用chunkhash，所以项目主入口文件main.js及其对应的依赖文件common.css由于被打包在同一个模块，所以共用相同的chunkhash，但是公共库由于是不同的模块，所以有单独的chunkhash。这样子就保证了在线上构建的时候只要文件内容没有更改就不会重复构建
          * 3. contenthash这是相比第二点来说，main.js和common.css有不同的hash值，main.js有改动 但是common.css没改动 common.css就不会重新打包
          */
-
+        clean: true,
         filename: '[name].[chunkhash:8].js',
-        path: resolve('dist')
+        path: resolve('dist'),
     },
     optimization: {
-        usedExports: true  // Tree shaking 只打哪些使用的代码 减少代码打包的体积
+        minimize: false,
+        usedExports: true,  // Tree shaking 只打哪些使用的代码 减少代码打包的体积
+        splitChunks: {
+            // 可选值有async、initial、all
+            // chunks: 'all',
+            minSize: 0,
+            // 表示拆分出的chunk的名称连接符。默认为~。如chunk~vendors.js
+            // automaticNameDelimiter: '~',
+            // 设置chunk的文件名。默认为true。当为true时，splitChunks基于chunk和cacheGroups的key自动命名。
+            // name: 'chunk-[chunkhash:8].js',
+            // cacheGroups: {
+            //     vendors: {
+            //         test: /[\\/]node_modules[\\/]/,
+            //         priority: -10
+            //     },
+            // }
+        },
     },
+
     externals,
     resolveLoader: {
         alias: { // 给loader取一个别名
@@ -135,7 +154,7 @@ module.exports = {
         rules: [{
             test: /\.vue$/,
             use: [{
-                loader: 'vue-loader' 
+                loader: 'vue-loader'
             }]
         }, {
             test: /\.(sa|sc|c)ss$/, // 匹配文件类型

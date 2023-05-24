@@ -4,5 +4,6 @@
 <style lang="scss" scoped>
 .home {
   color: red;
+  height: 400px;
 }
 </style>

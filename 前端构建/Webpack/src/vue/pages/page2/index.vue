@@ -7,5 +7,6 @@
 <style lang="scss" scoped>
     .page2 {
         color: blue;
+        height: 400px;
     }
 </style>
