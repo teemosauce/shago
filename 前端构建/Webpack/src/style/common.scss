@@ -14,12 +14,10 @@ body {
 
 .container {
     /* display: flex; */
-    /* background-image: url(../images/logo.png); */
+    /* background-image: url(../assets/images/logo.png); */
     /* background-color: red; */
     height: 100%;
     /* animation: ani 2s linear infinite; */
-
-   
 }
 
 @keyframes ani {
@@ -52,4 +50,8 @@ body {
       overflow-wrap: break-word;
       padding-inline: calc(var(--fontSize) / 2 + 1px);
     }
+  }
+
+  #title {
+    color: $testColor
   }
