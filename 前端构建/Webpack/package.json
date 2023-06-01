@@ -13,6 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-component": "^1.1.1",
     "compression-webpack-plugin": "^10.0.0",
     "css-loader": "^6.7.4",
     "html-webpack-plugin": "^5.5.1",

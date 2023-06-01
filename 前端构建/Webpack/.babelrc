@@ -1,0 +1,12 @@
+{
+    "presets": [
+        ["@babel/preset-env", { "modules": false }]
+    ],
+    "plugins": [
+        // 该配置可以按需引入element-ui中的组件 使用插件为babel-plugin-component
+        ["component", {
+            "libraryName": "element-ui",
+            "styleLibraryName": "theme-chalk"
+        }]
+    ]
+}

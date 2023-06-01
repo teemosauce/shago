@@ -133,18 +133,27 @@ module.exports = {
     usedExports: true, // Tree shaking 只打哪些使用的代码 减少代码打包的体积
     splitChunks: {
       // 可选值有async、initial、all
-      // chunks: 'all',
-      minSize: 0,
+      chunks: 'all',
+      // minSize: 0,
       // 表示拆分出的chunk的名称连接符。默认为~。如chunk~vendors.js
       // automaticNameDelimiter: '~',
       // 设置chunk的文件名。默认为true。当为true时，splitChunks基于chunk和cacheGroups的key自动命名。
-      // name: 'chunk-[chunkhash:8].js',
-      // cacheGroups: {
-      //     vendors: {
-      //         test: /[\\/]node_modules[\\/]/,
-      //         priority: -10
-      //     },
-      // }
+      // name: "aaaaa",
+      cacheGroups: {
+          // 把node_modules下的包单独打到vendors中
+          vendors: {
+              name: 'vendors',
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10
+          },
+          // 比如把ELEMENT-UI单独打包
+          // elementUI: {
+          //   name: 'element-ui',//组件名称
+          //   test: /[\\/]node_modules[\\/]_?element-ui(.*)/ ,//匹配路径
+          //   priority: 20,//优先级
+          //   // chunks: 'all',
+          // }
+      }
     },
   },
 
@@ -198,6 +207,11 @@ module.exports = {
         ],
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+      {
         // 自定义测试loader 处理以.abc结尾的文件
         test: /\.abc$/,
         use: [
@@ -211,14 +225,28 @@ module.exports = {
         ],
       },
       {
-        // 处理图片等资源文件
+        // 处理图片等资源文件 图片小于8k使用内联 大于8k使用路径方式加载
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource'
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024 // 小于8kb转base64，减少请求但是体积变大
+          }
+        },
+        generator: {
+          // hash是生成的hash值，加个:是表示取几位，相当于根据内容计算，ext是后缀，query是后缀之后的内容一般不用
+          filename: 'images/[hash:8][ext][query]' 
+        }
       },
+      // { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' },
       {
-        // 字体和svg
+        // 字体和svg 字体以文件路径方式加载
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: 'asset/inline',
+        type: 'asset/resource',
+        generator: {
+          // hash是生成的hash值，加个:是表示取几位，相当于根据内容计算，ext是后缀，query是后缀之后的内容一般不用
+          filename: 'fonts/[hash:8][ext][query]'
+        }
       },
     ],
   },

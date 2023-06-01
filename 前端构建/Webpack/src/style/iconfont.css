@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3429031 */
+  src: url('../assets/fonts/iconfont.woff2?t=1685525064332') format('woff2'),
+       url('../assets/fonts/iconfont.woff?t=1685525064332') format('woff'),
+       url('../assets/fonts/iconfont.ttf?t=1685525064332') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 100px;
+  color: red;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shanchu:before {
+  content: "\e74b";
+}
+
+.icon-plus:before {
+  content: "\e829";
+}
+
+.icon-shouyetianchong:before {
+  content: "\e692";
+}
+
+.icon-my:before {
+  content: "\e608";
+}
+
+.icon-rkzyhjwyh:before {
+  content: "\e600";
+}
+
+.icon-tagk:before {
+  content: "\e661";
+}
+
+.icon-wshxxwyh:before {
+  content: "\e613";
+}
+
+.icon-wyjy:before {
+  content: "\e63c";
+}
+
+.icon-zxxw:before {
+  content: "\e639";
+}
+
+.icon-nyhncwyh:before {
+  content: "\e603";
+}
+
+.icon-zxjbzs:before {
+  content: "\e61a";
+}
+
+.icon-sqmy:before {
+  content: "\e6cf";
+}
+
+.icon-fzhjjwyh:before {
+  content: "\e651";
+}
+
+.icon-jkwwtwyh:before {
+  content: "\e662";
+}
+
+.icon-wyfc:before {
+  content: "\e620";
+}
+
+.icon-tawyh:before {
+  content: "\e686";
+}
+
+.icon-tzgg:before {
+  content: "\e86a";
+}
+
+.icon-zxzc:before {
+  content: "\ee19";
+}
+
