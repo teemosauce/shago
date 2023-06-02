@@ -15,7 +15,7 @@ const routes = [{
         return new Promise((resolve)=> {
             setTimeout(()=> {
                 resolve(import(/* webpackChunkName: "async-page1" */ '@/vue/pages/page1/index.vue'))
-            }, 3000)
+            }, 1000)
         })
     },
     name: 'page1'

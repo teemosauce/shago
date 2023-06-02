@@ -1,13 +1,13 @@
 {
-  "name": "webpack",
+  "name": "monorepo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack --node-env development",
-    "build:production": "npx webpack --node-env production",
-    "start": "webpack server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:admin": "pnpm -C packages/admin & pnpm run dev",
+    "dev:platform": "cd packages/platform & pnpm dev",
+    "build:admin": "cd packages/admin & pnpm build",
+    "build:platform": "cd packages/platform & pnpm build"
   },
   "keywords": [],
   "author": "",
@@ -16,27 +16,20 @@
     "@babel/core": "^7.22.1",
     "@babel/preset-env": "^7.22.4",
     "babel-loader": "^9.1.2",
-    "babel-plugin-component": "^1.1.1",
-    "compression-webpack-plugin": "^10.0.0",
     "css-loader": "^6.7.4",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.6",
-    "postcss": "^8.4.23",
-    "postcss-loader": "^7.3.0",
-    "postcss-preset-env": "^8.3.2",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",
     "style-loader": "^3.3.3",
     "vue-loader": "^15.10.1",
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.83.1",
-    "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
-    "vue-router": "^3.6.5",
-    "element-ui": "^2.15.13",
-    "vue": "^2.7.14"
+    "vue": "^2.7.14",
+    "vue-router": "^3.6.5"
   }
 }

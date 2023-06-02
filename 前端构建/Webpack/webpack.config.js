@@ -113,6 +113,7 @@ module.exports = {
     alias: {
       "@": resolve("src"),
     },
+    extensions: ['.js', '.json', '.vue'] // 可以省略.vue后缀
   },
   // 85dc0fc38a6b9c0f99e8
   output: {

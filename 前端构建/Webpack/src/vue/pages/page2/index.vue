@@ -26,6 +26,7 @@
 import caoyuan from "@/assets/images/caoyuan.jpeg";
 import icon300 from "@/assets/images/icon.jpeg";
 import ai from "@/assets/images/ai.jpeg";
+
 console.log("caoyuan", caoyuan);
 
 let largeImage =

@@ -1,0 +1,17 @@
+{
+  "name": "@all/admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack server",
+    "build": "webpack --node-env production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@all/shared": "workspace:^",
+    "element-ui": "^2.15.13"
+  }
+}
