@@ -1,9 +1,10 @@
 {
-  "name": "monorepo",
+  "name": "monorepo2",
   "version": "1.0.0",
-  "description": "",
+  "description": "这是一个多项目的代码库，里面有一个vue2和vue3的项目",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev:admin": "cd apps/admin && pnpm run dev",
     "dev:platform": "cd apps/platform && pnpm dev",
     "build:admin": "cd apps/admin && pnpm build",
