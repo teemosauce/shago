@@ -1,0 +1,4 @@
+packages: # 所有在 packages/ 子目录下的 package
+- 'shared' # 可以查找shared文件夹下的package.json
+- 'apps/*' # 可以查找apps文件夹下层文件夹里面package.json
+- 'packages/**' # 可以查找packages所有后代目录里面的package.json

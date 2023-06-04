@@ -16,7 +16,7 @@ module.exports = {
   devServer: {
     hot: true, // 开启热更新
     static: resolve("dist"), // 将dist目录下的文件 作为额外可访问文件
-    port: 8091, // 启动服务的端口
+    port: 8092, // 启动服务的端口
     compress: true, // 启动gzip压缩
     open: true, // 自动打开
   },
@@ -115,7 +115,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       // 自动将打包后的代码注入到html页面中
       template: resolve("index.html"), // 使用index-cdn.html 原始模版
-      title: "Admin App", // 传递给页面的title，可以在模版中引用
+      title: "Vue3 Platform App", // 传递给页面的title，可以在模版中引用
       filename: "index.html", // 输出的html名称
       // 生产环境使用CDN资源 原理就是在html页面中拿到这些参数 使用模板渲染引擎去把这些资源渲染出来
     }),
@@ -124,7 +124,4 @@ module.exports = {
       filename: "css/[name].[chunkhash:8].css",
     }),
   ],
-  optimization: {
-    minimize: false
-  }
 };

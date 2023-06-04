@@ -1,0 +1,25 @@
+{
+  "name": "@captain/platform",
+  "version": "1.0.0",
+  "description": "这是一个vue3的项目",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack server",
+    "build": "webpack --node-env production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@captain/components-vue3": "workspace:^",
+    "@captain/framework-react": "workspace:^",
+    "@captain/math": "workspace:^",
+    "@captain/shared": "workspace:^",
+    "element-plus": "^2.3.6",
+    "vue": "^3.2.36"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.3.4",
+    "vue-loader": "^17.0.1"
+  }
+}

@@ -13,15 +13,21 @@
       <Button type="error">Error</Button>
     </div>
 
-    <u-button>我是共享的组件</u-button>
+    <u-button @click="handleClick">我是共享的组件</u-button>
   </div>
 </template>
 
 <script>
 import UButton from '@all/shared/components/button/index.vue'
+import { getMessage } from '@all/shared/utils/index'
 export default {
     components: {
         UButton
+    },
+    methods: {
+        handleClick() {
+            this.$Message.info(getMessage())
+        }
     }
 };
 </script>

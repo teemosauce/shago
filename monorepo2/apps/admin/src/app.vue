@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Admin App!</h1>
+    <h1>Vue2 Admin App!</h1>
     <div>
       <el-row>
         <el-button>默认按钮</el-button>
@@ -40,27 +40,47 @@
     </div>
 
     <u-button @click="handleClick">我是共享的组件</u-button>
+
+    <el-input v-model="number1" placeholder="数字1" type="number"></el-input>
+    +
+    <el-input v-model="number2" placeholder="数字2" type="number"></el-input>
+    =
+    <span>{{ total }}</span>
   </div>
 </template>
 
 <script>
-import UButton from '@all/shared/components/button/index.vue'
-import { getMessage } from '@all/shared/utils/index'
+import UButton from "@captain/components-vue2/button/index.vue";
+import { getMessage } from "../../../shared/utils/index";
+import Ravage from "../../../shared/libs/ravage";
 
-import Ravage from '@all/shared/libs/ravage'
+import { add } from '@captain/math'
+
 export default {
-    components: {
-        UButton
-    },
-    methods: {
-        handleClick() {
-            this.$message(getMessage())
+  components: {
+    UButton,
+  },
+  data() {
+    return {
+      number1: 0,
+      number2: 0,
+    };
+  },
 
-            let ravage = new Ravage('波士顿机器狗', '黑色')
-            ravage.crawl()
-            console.log(ravage.toString())
-        }
-    }
+  computed: {
+    total() {
+      return add(parseFloat(this.number1), parseFloat(this.number2))
+    },
+  },
+  methods: {
+    handleClick() {
+      this.$message(getMessage());
+
+      let ravage = new Ravage("波士顿机器狗", "黑色");
+      ravage.crawl();
+      console.log(ravage.toString());
+    },
+  },
 };
 </script>
 
