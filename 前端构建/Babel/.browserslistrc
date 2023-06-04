@@ -1,0 +1,17 @@
+# 最佳实践
+
+# 仅仅当你在特定浏览器上开发web app 的时候，才可以用类似last 2 Chrome version的查询条件来锁定特别具体的浏览器品牌和版本。 市面上有各种各样的浏览器，同时浏览器的版本碎片化也很严重，如果你在开发一款通用的 webapp，那就应该考虑浏览器多样性导致的兼容问题。
+# 如果你不想用 browserslist 的默认设置，推荐使用last 1 version, not dead 和 > 0.2%(或者> 1% in US,> 1% in my stats).仅仅使用last n versions 将添加太多的废弃浏览器到工程里面来，同时也并没有有效的覆盖那些占有率仍然很高的老版本浏览器。Just > 0.2% make popular browsers even more popular, so we will have a monopoly and stagnation, as we had with Internet Explorer 6（这里没懂啥意思，才疏学浅见谅）.
+# 不移除某些浏览器，是因为你不了解它们的分布。Opera mini 在非洲有一亿用户，全球范围内，它也比 微软的 Edge 浏览器更加流行。QQ 浏览器的使用量比桌面端的火狐和 Safari 浏览器加起来还多。
+
+
+# 基于全球使用率统计而选择的浏览器版本范围。>=,<,<=同样适用。
+# > 0.2%
+
+# 每个浏览器最近的两个版本
+
+last 2 versions
+
+# not dead
+
+# Chrome 100

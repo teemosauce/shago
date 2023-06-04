@@ -1,0 +1,28 @@
+{
+  "name": "babel",
+  "version": "1.0.0",
+  "description": "babel配置教程",
+  "main": "dist/common.cjs.js",
+  "module": "dist/common.esm.js",
+  "browser": "dist/common.umd.js",
+  "scripts": {
+    "build": "npx rollup -c",
+    "dev": "npx rollup -c -w",
+    "compile": "npx babel src --out-dir dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/plugin-transform-runtime": "^7.22.4",
+    "@babel/preset-env": "^7.22.4",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "core-js": "^3.30.2",
+    "rollup": "^3.23.0"
+  }
+}
