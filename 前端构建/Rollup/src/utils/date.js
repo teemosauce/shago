@@ -1,8 +1,7 @@
-import { print } from "./print"
-// import moment from "moment/moment"
+import moment from "moment/moment"
 
 export const getDate = () => {
-    // return moment().format('YYYY年MMMMDo , h:mm:ss a')
+    return moment().format('YYYY年MMMMDo , h:mm:ss a')
 }
 
 export const getTime = () => Date.now()
@@ -13,9 +12,4 @@ export const formatDate = () => {
     let month = d.getMonth()
     let date = d.getDate()
     return `${year}-${month}-${date}`
-}
-
-
-export const logDate = () => {
-    print(formatDate)
 }

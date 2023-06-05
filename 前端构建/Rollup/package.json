@@ -1,7 +1,7 @@
 {
   "name": "rollup",
   "version": "1.0.0",
-  "description": "",
+  "description": "Rollup搭建应用程序示例",
   "main": "dist/test.cjs.js",
   "module": "dist/test.esm.js",
   "browser": "dist/test.umd.js",
@@ -15,11 +15,25 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.22.4",
+    "@babel/preset-env": "^7.22.4",
+    "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^25.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.2",
-    "rollup": "^3.23.0"
+    "@rollup/plugin-html": "^1.0.2",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "core-js": "^3.30.2",
+    "rollup": "^3.23.0",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-scss": "^4.0.0",
+    "rollup-plugin-serve": "^2.0.2",
+    "sass": "^1.62.1"
   },
   "dependencies": {
+    "jquery": "^3.7.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"
   }
