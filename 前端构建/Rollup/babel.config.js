@@ -5,7 +5,7 @@ module.exports = {
       {
         modules: false, // 设置为false, 否则babel会在rollup有机会执行其操作之前导致我们的模块转化为commonjs
         targets: {
-          browsers: ["last 2 versions"], // last 2 chrome version
+          browsers: ["last 2 chrome version"], // last 2 versions
         },
         useBuiltIns: "entry", //  | usage 使用usage构建出来的包一直有个错误 暂时没找到问题所在
         corejs: {

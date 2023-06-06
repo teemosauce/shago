@@ -1,4 +1,9 @@
+@mixin calcFontSize($p, $v) {
+    $p: $v;
+}
+
 h1 {
     color: red;
-    font-size: 30px;
+    // @include calcFontSize("font-size", 10px);
+    font-size: 1rem;
 }
